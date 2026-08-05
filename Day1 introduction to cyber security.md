@@ -126,3 +126,14 @@ Information should be available to users whenever they need it. If a user cannot
 - **Blue Teaming**: Defensive security — defending against attacks and improving security controls
 - **Security Audit**: Evaluation of an organization's information system
 - **Vulnerability Assessment**: Identifying and classifying security flaws in systems, networks, and software
+  
+## Jobs with Ethical Hacking
+- **cyber security expert**
+- **security analyst (soc)**
+- **cyber security consultant88
+- **web penetration tester**
+- **mobile penetration tester
+- **internal and external penetration tester
+- **network security tester
+- **bug bounty hunter
+-- 
