@@ -570,9 +570,59 @@ If a file has unsaved changes, Nano displays an **asterisk (`*`)** next to the f
 
 ## 3. Quick Comparison
 
-|Feature|Vim|Nano|
+| Feature           | Vim                                        | Nano                   |
+| ----------------- | ------------------------------------------ | ---------------------- |
+| Learning curve    | Steep                                      | Gentle                 |
+| Editing style     | Modal (Normal/Insert/Command/Visual)       | Direct typing          |
+| Power/flexibility | Very high                                  | Basic                  |
+| Best for          | Experienced users, heavy editing/scripting | Quick edits, beginners |
+# Linux User Management — Notes
+
+## 1. What is a User?
+
+Every person (or process) that uses a Linux system is represented by a **user account**. Every user belongs to at least one **group**.
+
+- `whoami` → prints your current username.
+
+## 2. Types of Users & UID Ranges
+
+|User Type|UID Range|Notes|
 |---|---|---|
-|Learning curve|Steep|Gentle|
-|Editing style|Modal (Normal/Insert/Command/Visual)|Direct typing|
-|Power/flexibility|Very high|Basic|
-|Best for|Experienced users, heavy editing/scripting|Quick edits, beginners|
+|**root**|`0`|The superuser. Full, unrestricted access to the entire system.|
+|**System users**|`1–999`|Created automatically for services/daemons (e.g. `www-data`, `mysql`), not meant for humans to log in as.|
+|**Normal (human) users**|`1000+`|Created when you or an admin adds a real person as a user. First normal user is usually `1000`, next is `1001`, and so on.|
+
+**Important correction:** privilege is **not** determined by UID number. A user with UID 1000 and a user with UID 1005 have _equal_ privileges by default. What actually gives a user extra power is being added to the **sudo (or wheel) group** — root (UID 0) is the only UID that's inherently privileged by the system itself.
+
+## 3. Key Directories
+
+- `/root` → root's home directory. Only root can access it.
+- `/sbin` (and `/usr/sbin`) → contains system administration binaries. Normal users can often see them, but need `sudo` to actually run most of them effectively.
+
+## 4. Creating a New User
+
+```bash
+sudo useradd username     # low-level tool, minimal setup, no prompts
+sudo adduser username     # higher-level, interactive script (Debian/Ubuntu)
+```
+
+- `adduser` typically sets the default shell to `/bin/bash` and walks you through setting a password, full name, etc.
+- `useradd` alone typically gives no shell or `/bin/sh` by default — use `-s /bin/bash` to set it explicitly.
+
+## 5. Useful Commands
+
+|Command|What it does|
+|---|---|
+|`cat /etc/passwd`|Lists all users registered on the system|
+|`id`|Shows your own UID, GID, and group memberships|
+|`id username`|Shows UID/GID info for a specific user|
+|`sudo su` / `su -`|Switch to the root user session|
+
+## 6. Logging In as Root
+
+- `su -` → switch to root, requires **root's password**.
+- `sudo su` → switch to root using **your own password** (only works if your user has sudo privileges).
+
+---
+
+c
